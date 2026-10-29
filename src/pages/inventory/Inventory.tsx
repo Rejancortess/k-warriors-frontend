@@ -13,7 +13,7 @@ const Inventory = () => {
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center">
           <div>
             <p className="text-sm text-gray-400 font-medium">TOTAL PRODUCTS</p>
-            <h3 className="text-3xl font-bold mt-1">00</h3>
+            <h3 className="text-3xl font-bold mt-1">5</h3>
             <p className="text-xs text-emerald-600 mt-2 flex items-center gap-1 font-medium">
               <span><TrendingUp className="w-4 h-4" /></span> +0 added this week
             </p>
@@ -27,7 +27,7 @@ const Inventory = () => {
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center">
           <div>
             <p className="text-sm text-gray-400 font-medium">LOW STOCK</p>
-            <h3 className="text-3xl font-bold mt-1">00</h3>
+            <h3 className="text-3xl font-bold mt-1">2</h3>
             <p className="text-xs text-gray-400 mt-2">Action Required</p>
           </div>
           <div className="p-3 bg-gray-100 text-gray-600 rounded-xl">
@@ -39,7 +39,7 @@ const Inventory = () => {
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center">
           <div>
             <p className="text-sm text-gray-400 font-medium">OUT OF STOCK</p>
-            <h3 className="text-3xl font-bold mt-1">00</h3>
+            <h3 className="text-3xl font-bold mt-1"><span className="text-red-600">0</span></h3>
             <p className="text-xs text-red-500 font-medium"><TriangleAlert className="w-4 h-4 inline"/> ReStock</p>
           </div>
           <div className="p-3 bg-red-50 text-red-600 rounded-xl">
@@ -78,13 +78,19 @@ const Inventory = () => {
             </thead>
             <tbody className="divide-y divide-gray-50 text-sm">
               {[
-                { name: "Sample Product #1", barcode: "480123456789", stock: "120 units", status: "Normal", statusColor: "bg-emerald-50 text-emerald-600"},
+                { name: "Sample Product #1", barcode: "480123456789", stock: "120 units", status: "Normal", statusColor: "bg-emerald-50 text-emerald-600" },
+                { name: "Sample Product #2", barcode: "480123456790", stock: "400 units", status: "Normal", statusColor: "bg-emerald-50 text-emerald-600" },
+                { name: "Sample Product #3", barcode: "480123456791", stock: "18 units", status: "Low Stock", statusColor: "bg-red-50 text-red-600", stockColor: "text-red-600" },
+                { name: "Sample Product #4", barcode: "480123456792", stock: "3 units", status: "Low Stock", statusColor: "bg-red-50 text-red-600", stockColor: "text-red-600" },
+                { name: "Sample Product #5", barcode: "480123456793", stock: "70 units", status: "Normal", statusColor: "bg-emerald-50 text-emerald-600" },
               ].map((item, index) => (
                 <tr key={index} className="hover:bg-gray-50/50">
                   <td className="py-4 font-medium text-gray-800">{item.name}</td>
                   <td className="py-4 text-gray-500 font-mono text-xs"><span className="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-200"><Barcode className="w-4 h-4 inline" /> {item.barcode}</span></td>
                   <td className="py-4 font-semibold text-gray-800">
-                    {item.stock.split(" ")[0]} <span className="text-gray-400 font-normal text-xs">units</span>
+                    <span className={item.stockColor}>
+                    {item.stock.split(" ")[0]} <span className="font-normal text-xs">units</span>
+                    </span>
                   </td>
                   <td className="py-4">
                     <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${item.statusColor}`}>
