@@ -61,7 +61,7 @@ export default function Sidebar() {
               to={item.path}
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg p-3 transition ${
-                  isActive ? "bg-green-600 text-white" : "hover:bg-slate-300"
+                  isActive ? "bg-primary text-white" : "hover:bg-slate-300"
                 }`
               }
             >

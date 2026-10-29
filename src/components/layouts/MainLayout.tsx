@@ -15,7 +15,7 @@ export default function MainLayout() {
         <Header />
 
         {/* Dynamic Page Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 bg-[#F9F9FF]">
           <Outlet />
         </main>
       </div>
