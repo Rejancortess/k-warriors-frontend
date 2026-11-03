@@ -20,9 +20,16 @@ export interface TransactionListItem {
   id: string;
   type: "STOCK_IN" | "STOCK_OUT";
   quantity: number;
+  previousStock: number;
+  newStock: number;
   createdAt: string;
   product: {
     id?: string;
+    name: string;
+    sku?: string;
+    barcode?: string | null;
+  } | null;
+  user?: {
     name: string;
   } | null;
 }

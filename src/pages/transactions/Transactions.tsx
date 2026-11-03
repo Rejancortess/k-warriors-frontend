@@ -1,7 +1,14 @@
-import React from "react";
+import TransactionHistoryContainer from "../../components/transactions/TransactionHistoryContainer";
 
 const Transactions = () => {
-  return <div>Transactions</div>;
+  return (
+    <section className="p-6">
+      <h1 className="text-2xl font-semibold text-slate-950">Transaction History</h1>
+      <div className="mt-6">
+        <TransactionHistoryContainer />
+      </div>
+    </section>
+  );
 };
 
 export default Transactions;

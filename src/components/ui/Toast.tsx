@@ -3,9 +3,11 @@ import { createPortal } from "react-dom";
 import { CircleCheck, X } from "lucide-react";
 
 export default function Toast({
+  title = "New product added",
   message,
   onClose,
 }: {
+  title?: string;
   message: string;
   onClose: () => void;
 }) {
@@ -26,7 +28,7 @@ export default function Toast({
         <CircleCheck size={18} />
       </span>
       <div className="min-w-0 pr-1">
-        <p className="text-sm font-semibold text-slate-950">New product added</p>
+        <p className="text-sm font-semibold text-slate-950">{title}</p>
         <p className="truncate text-sm text-slate-500">{message}</p>
       </div>
       <button

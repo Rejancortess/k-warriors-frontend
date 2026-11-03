@@ -21,6 +21,15 @@ export const productService = {
     return response.data;
   },
 
+  // GET /api/products/search?q=
+  search: async (query: string) => {
+    const response = await api.get<ApiResponse<Product[]>>(`${BASE_URL}/search`, {
+      params: { q: query },
+    });
+
+    return response.data;
+  },
+
   // GET /api/products/:id
   getById: async (id: string) => {
     const response = await api.get<ApiResponse<Product>>(`${BASE_URL}/${id}`);

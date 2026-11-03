@@ -122,7 +122,7 @@ export default function RecentTransactionCard() {
                       className={`inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1.5 text-xs leading-tight font-semibold ${
                         stockIn
                           ? "bg-emerald-100 text-emerald-700"
-                          : "bg-indigo-100 text-slate-600"
+                          : "bg-red-100 text-red-700"
                       }`}
                     >
                       {stockIn ? (
