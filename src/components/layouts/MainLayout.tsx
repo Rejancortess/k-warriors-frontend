@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import Sidebar from "./Sidebar";
+import Sidebar from "./SideBar";
 import Header from "./Header";
 
 export default function MainLayout() {
@@ -13,9 +13,8 @@ export default function MainLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Global Header */}
         <Header />
-
         {/* Dynamic Page Content */}
-        <main className="flex-1 overflow-y-auto p-6 bg-[#F9F9FF]">
+        <main className="flex flex-1 flex-col overflow-y-auto bg-[#F9F9FF]">
           <Outlet />
         </main>
       </div>

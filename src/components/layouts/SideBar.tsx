@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Package,
@@ -6,7 +7,10 @@ import {
   PackagePlus,
   History,
   LogOut,
+  User,
 } from "lucide-react";
+import { useAuthStore } from "../../stores/useAuthStore";
+import { authService, type AuthProfile } from "../../services/auth.service";
 
 const menuItems = [
   {
@@ -36,7 +40,52 @@ const menuItems = [
   },
 ];
 
+function formatRole(role: AuthProfile["role"]) {
+  return role === "ADMIN" ? "Admin" : "Staff";
+}
+
 export default function Sidebar() {
+  const navigate = useNavigate();
+  const logout = useAuthStore((state) => state.logout);
+  const profile = useAuthStore((state) => state.profile);
+  const setProfile = useAuthStore((state) => state.setProfile);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(!profile);
+
+  useEffect(() => {
+    if (profile) {
+      setLoadingProfile(false);
+      return;
+    }
+
+    let active = true;
+
+    authService
+      .fetchProfile()
+      .then((next) => {
+        if (active && next) setProfile(next);
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (active) setLoadingProfile(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [profile, setProfile]);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+
+    try {
+      await logout();
+      navigate("/", { replace: true });
+    } finally {
+      setLoggingOut(false);
+    }
+  }
+
   return (
     <aside className="flex min-h-screen w-64 flex-col p-5 text-black border-r border-slate-300">
       <div className="flex mb-10 items-center">
@@ -72,15 +121,30 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <button
-        type="button"
-        disabled
-        className="flex items-center gap-3 rounded-lg p-3 opacity-50"
-        title="Logout will be enabled after authentication is connected"
-      >
-        <LogOut size={20} />
-        <NavLink to="/">Logout</NavLink>
-      </button>
+      <div className="flex items-center gap-3 justify-between ">
+        <div className="flex items-center gap-3">
+          <span className="bg-primary text-white rounded-full p-2">
+            <User size={20} />
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold">
+              {loadingProfile ? "Loading..." : (profile?.name ?? "Guest")}
+            </p>
+            <p className="truncate text-sm text-slate-500">
+              {profile ? formatRole(profile.role) : ""}
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          aria-label="Logout"
+          disabled={loggingOut}
+          onClick={() => void handleLogout()}
+          className="rounded-lg p-2 text-slate-600 hover:bg-slate-200 disabled:opacity-50"
+        >
+          <LogOut size={20} />
+        </button>
+      </div>
     </aside>
   );
 }
