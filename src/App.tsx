@@ -9,5 +9,13 @@ export default function App() {
         <AppRoutes />
       </BrowserRouter>
     </ThemeProvider>
+import { AuthListener } from "./components/auth/AuthListener";
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthListener />
+      <AppRoutes />
+    </BrowserRouter>
   );
 }

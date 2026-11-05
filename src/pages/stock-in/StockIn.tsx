@@ -93,6 +93,15 @@ const StockIn = () => {
           </div>
         </div>
 
+import AddStockContainer from "../../components/stock-in/AddStockContainer";
+import StepsCard from "../../components/stock-in/StepsCard";
+
+const StockIn = () => {
+  return (
+    <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 p-6">
+      <div className="flex w-full max-w-5xl flex-col items-center gap-4">
+        <StepsCard />
+        <AddStockContainer />
       </div>
     </div>
   );

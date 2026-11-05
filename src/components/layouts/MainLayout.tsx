@@ -13,9 +13,9 @@ export default function MainLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Global Header */}
         <Header />
-
         {/* Dynamic Page Content */}
         <main className="flex-1 overflow-y-auto bg-[#F9F9FF] p-6 dark:bg-gray-900">
+        <main className="flex flex-1 flex-col overflow-y-auto bg-[#F9F9FF]">
           <Outlet />
         </main>
       </div>

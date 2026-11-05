@@ -1,5 +1,11 @@
+import ProductInventory from "../../components/inventory/ProductInventory";
+
 const Inventory = () => {
-  return <div>Inventory</div>;
+  return (
+    <section className="p-6">
+      <ProductInventory />
+    </section>
+  );
 };
 
 export default Inventory;
