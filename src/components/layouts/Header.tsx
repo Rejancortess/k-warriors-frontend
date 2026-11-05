@@ -1,3 +1,6 @@
+import { Bell, Moon, Search, Sun, UserRound } from "lucide-react";
+import { useState } from "react";
+import { useTheme } from "../../contexts/ThemeContext";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bell, LoaderCircle, Search, UserRound } from "lucide-react";
@@ -9,6 +12,12 @@ export default function Header() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const [search, setSearch] = useState("");
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-900">
+      {/* Global Search */}
+      <div className="relative w-full max-w-md">
   const [results, setResults] = useState<Product[]>([]);
   const [resultsQuery, setResultsQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -97,6 +106,7 @@ export default function Header() {
             if (event.key === "Escape") setOpen(false);
           }}
           placeholder="Search products..."
+          className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-10 pr-4 text-gray-900 outline-none focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
           role="combobox"
           aria-expanded={showResults}
           aria-controls="product-search-results"
@@ -158,8 +168,18 @@ export default function Header() {
       <div className="ml-4 flex items-center gap-5">
         <button
           type="button"
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          aria-pressed={theme === "dark"}
+          onClick={toggleTheme}
+          className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+        >
+          {theme === "light" ? <Moon size={21} /> : <Sun size={21} />}
+        </button>
+
+        <button
+          type="button"
           aria-label="Notifications"
-          className="relative text-gray-600 hover:text-blue-600"
+          className="relative text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
         >
           <Bell size={22} />
         </button>
@@ -167,7 +187,7 @@ export default function Header() {
         <button
           type="button"
           aria-label="User profile"
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
         >
           <UserRound size={22} />
         </button>

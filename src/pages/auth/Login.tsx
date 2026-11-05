@@ -59,6 +59,19 @@ export default function Login() {
   }
 
   return (
+    <>
+      <div className="flex h-screen flex-col items-center justify-center bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+        <h1 className="text-2xl font-bold">Login</h1>
+        <NavLink
+          to="/dashboard"
+          className="rounded-md bg-blue-500 p-2 text-white"
+        >
+          Go to dashboard
+        </NavLink>
+      </div>
+    </>
+  );
+};
     <div className="flex min-h-screen flex-col bg-[#f7f8fb] text-slate-950">
       <main className="mx-auto flex w-full max-w-6xl flex-1 items-center px-6 py-10 lg:px-10">
         <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(380px,460px)] lg:gap-16">
