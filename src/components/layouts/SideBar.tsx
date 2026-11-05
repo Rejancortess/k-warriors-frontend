@@ -38,7 +38,7 @@ const menuItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="flex min-h-screen w-64 flex-col p-5 text-black border-r border-slate-300">
+    <aside className="flex min-h-screen w-64 flex-col border-r border-slate-300 bg-white p-5 text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
       <div className="flex mb-10 items-center">
         <img
           src="/logo.svg"
@@ -61,7 +61,9 @@ export default function Sidebar() {
               to={item.path}
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg p-3 transition ${
-                  isActive ? "bg-primary text-white" : "hover:bg-slate-300"
+                  isActive
+                    ? "bg-primary text-white"
+                    : "hover:bg-slate-200 dark:hover:bg-gray-800"
                 }`
               }
             >

@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-import Sidebar from "./Sidebar";
+import Sidebar from "./SideBar";
 import Header from "./Header";
 
 export default function MainLayout() {
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
       {/* Global Sidebar */}
       <Sidebar />
 
@@ -15,7 +15,7 @@ export default function MainLayout() {
         <Header />
 
         {/* Dynamic Page Content */}
-        <main className="flex-1 overflow-y-auto p-6 bg-[#F9F9FF]">
+        <main className="flex-1 overflow-y-auto bg-[#F9F9FF] p-6 dark:bg-gray-900">
           <Outlet />
         </main>
       </div>

@@ -7,63 +7,63 @@ const StockIn = () => {
   const isBarcodeMatched = barcode === dummyBarcode;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-4 bg-gray-50 min-h-screen">
+    <div className="mx-auto min-h-screen max-w-3xl space-y-4 bg-gray-50 p-6 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
 
       {/* Head Part ni */}
-      <div className="p-4 bg-white rounded-2xl border border-gray-200 flex justify-between">
+      <div className="flex justify-between rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
 
         <div>
           <div className="flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-emerald-800 text-white font-semibold text-xs flex items-center justify-center">1</span>
-            <span className="text-sm font-semibold text-emerald-800">Scan Code</span>
+            <span className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">Scan Code</span>
           </div>
-          <p className="text-xs text-gray-400 mt-1">Hardware input</p>
+          <p className="mt-1 text-xs text-gray-400 dark:text-gray-400">Hardware input</p>
         </div>
 
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-emerald-500 text-gray font-semibold text-xs flex items-center justify-center">2</span>
-            <span className="text-sm font-semibold text-gray-800">Verify Code</span>
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-xs font-semibold text-white">2</span>
+            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">Verify Code</span>
           </div>
-          <p className="text-xs text-gray-400 mt-1">Barcode Match</p>
+          <p className="mt-1 text-xs text-gray-400 dark:text-gray-400">Barcode Match</p>
         </div>
 
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 font-semibold text-xs flex items-center justify-center">3</span>
-            <span className="text-sm font-semibold text-gray-800">Quantity</span>
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-xs font-semibold text-gray-600 dark:bg-gray-700 dark:text-gray-200">3</span>
+            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">Quantity</span>
           </div>
-          <p className="text-xs text-gray-400 mt-1">Set batch units</p>
+          <p className="mt-1 text-xs text-gray-400 dark:text-gray-400">Set batch units</p>
         </div>
 
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 font-semibold text-xs flex items-center justify-center">4</span>
-            <span className="text-sm font-semibold text-gray-800">Add Stock</span>
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-xs font-semibold text-gray-600 dark:bg-gray-700 dark:text-gray-200">4</span>
+            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">Add Stock</span>
           </div>
-          <p className="text-xs text-gray-400 mt-1">Instant commit</p>
+          <p className="mt-1 text-xs text-gray-400 dark:text-gray-400">Instant commit</p>
         </div>
 
       </div>
 
       {/* Body Part ni */}
-      <div className="p-6 bg-white rounded-2xl border border-gray-200 space-y-6">
+      <div className="space-y-6 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
 
         {/* Barcode Part ni */}
         <div>
           <div className="flex justify-between items-center mb-2">
 
-            <label className="text-lg font-semibold text-gray-900">Scan Product <span className="text-red-500">*</span>
+            <label className="text-lg font-semibold text-gray-900 dark:text-gray-100">Scan Product <span className="text-red-500">*</span>
             </label>
 
-            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-2 rounded-full font-medium">Barcode or QR</span>
+            <span className="rounded-full bg-gray-100 px-2 py-2 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-200">Barcode or QR</span>
 
           </div>
 
-          <div className="flex justify-between items-center px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl">
+          <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-900">
 
-            <div className="flex items-center space-x-3 text-gray-800 font-medium text-sm">
-              <ScanBarcode className="w-5 h-5 text-gray-800" />
+            <div className="flex items-center space-x-3 text-sm font-medium text-gray-800 dark:text-gray-200">
+              <ScanBarcode className="h-5 w-5 text-gray-800 dark:text-gray-200" />
               <input
                 type="text"
                 inputMode="numeric"
@@ -71,12 +71,12 @@ const StockIn = () => {
                 value={barcode}
                 onChange={(event) => setBarcode(event.target.value.replace(/\D/g, ''))}
                 placeholder="123456789"
-                className="bg-transparent focus:outline-none w-full"
+                className="w-full bg-transparent placeholder:text-gray-400 focus:outline-none"
               />
             </div>
 
             {isBarcodeMatched && (
-              <div className="flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-700">
+              <div className="flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
                 <Check className="h-4 w-4" />
                 <span>Code matched</span>
               </div>
@@ -86,7 +86,7 @@ const StockIn = () => {
           <div>
             <div className='flex justify-between items-center mt-4 mb-4'>
 
-              <label className="text-lg font-semibold text-gray-900">Product Name
+              <label className="text-lg font-semibold text-gray-900 dark:text-gray-100">Product Name
               </label>
 
             </div>
