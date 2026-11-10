@@ -5,7 +5,7 @@ import Header from "./Header";
 
 export default function MainLayout() {
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-canvas">
       {/* Global Sidebar */}
       <Sidebar />
 
@@ -14,7 +14,7 @@ export default function MainLayout() {
         {/* Global Header */}
         <Header />
         {/* Dynamic Page Content */}
-        <main className="flex flex-1 flex-col overflow-y-auto bg-[#F9F9FF]">
+        <main className="flex flex-1 flex-col overflow-y-auto bg-canvas">
           <Outlet />
         </main>
       </div>

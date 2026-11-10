@@ -87,7 +87,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="flex min-h-screen w-64 flex-col p-5 text-black border-r border-slate-300">
+    <aside className="flex min-h-screen w-64 flex-col p-5 text-ink border-r border-line">
       <div className="flex mb-10 items-center">
         <img
           src="/logo.svg"
@@ -96,7 +96,7 @@ export default function Sidebar() {
         />
         <div>
           <h1 className=" text-xl font-bold">K-WARRIORS</h1>
-          <p className="text-sm ">Inventory System</p>
+          <p className="text-sm text-muted">Inventory System</p>
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export default function Sidebar() {
               to={item.path}
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg p-3 transition ${
-                  isActive ? "bg-primary text-white" : "hover:bg-slate-300"
+                  isActive ? "bg-primary text-white" : "hover:bg-canvas"
                 }`
               }
             >

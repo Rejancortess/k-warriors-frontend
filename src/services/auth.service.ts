@@ -1,6 +1,11 @@
 import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
+  updateProfile,
   onAuthStateChanged,
 } from "firebase/auth";
 
@@ -39,6 +44,42 @@ export const authService = {
 
   logout: async () => {
     await signOut(auth);
+  },
+
+  requestPasswordReset: async (email: string) => {
+    await sendPasswordResetEmail(auth, email);
+  },
+
+  changePassword: async (currentPassword: string, nextPassword: string) => {
+    const current = auth.currentUser;
+
+    if (!current?.email) {
+      throw new Error("Sign in again before changing your password.");
+    }
+
+    const credential = EmailAuthProvider.credential(
+      current.email,
+      currentPassword,
+    );
+    await reauthenticateWithCredential(current, credential);
+    await updatePassword(current, nextPassword);
+  },
+
+  updateName: async (name: string) => {
+    const response = await api.patch<ApiResponse<AuthProfile>>("/auth/profile", {
+      name,
+    });
+    const current = auth.currentUser;
+
+    if (current) {
+      try {
+        await updateProfile(current, { displayName: response.data.data.name });
+      } catch {
+        // The saved name still comes from the account record.
+      }
+    }
+
+    return response.data.data;
   },
 
   fetchProfile: async () => {

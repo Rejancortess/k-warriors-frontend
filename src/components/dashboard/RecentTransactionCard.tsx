@@ -54,7 +54,7 @@ export default function RecentTransactionCard() {
   }, []);
 
   return (
-    <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100">
+    <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-lg font-bold tracking-tight text-slate-950">
           Recent Transactions
@@ -62,13 +62,13 @@ export default function RecentTransactionCard() {
         <div className="flex items-center gap-4">
           <button
             type="button"
-            className="rounded-full border border-violet-200 px-4 py-1.5 text-sm font-medium text-slate-700"
+            className="rounded-full border border-line px-4 py-1.5 text-sm font-medium text-ink"
           >
             All
           </button>
           <Link
             to="/transactions"
-            className="text-sm font-semibold text-primary"
+            className="text-sm font-semibold text-link"
           >
             View All &gt;
           </Link>
@@ -78,7 +78,7 @@ export default function RecentTransactionCard() {
       <div className="mt-5 overflow-x-auto">
         <div className="min-w-[640px]">
           <div
-            className={`${columns} rounded-xl bg-[#F4F6FB] px-4 py-3 text-sm text-slate-400`}
+            className={`${columns} rounded-xl bg-canvas px-4 py-3 text-sm text-slate-400`}
           >
             <span>ID</span>
             <span>Product</span>
@@ -95,7 +95,7 @@ export default function RecentTransactionCard() {
                 Loading transactions...
               </p>
             ) : error ? (
-              <p className="px-4 py-8 text-sm text-red-600">{error}</p>
+              <p className="px-4 py-8 text-sm text-warning">{error}</p>
             ) : transactions.length === 0 ? (
               <p className="px-4 py-8 text-sm text-slate-500">
                 No transactions yet.
@@ -107,7 +107,7 @@ export default function RecentTransactionCard() {
                 return (
                   <div
                     key={transaction.id}
-                    className={`${columns} border-b border-slate-100 px-4 py-5 last:border-b-0`}
+                    className={`${columns} border-b border-line px-4 py-5 last:border-b-0`}
                   >
                     <span
                       className="max-w-16 text-sm leading-tight text-slate-400"
@@ -121,8 +121,8 @@ export default function RecentTransactionCard() {
                     <span
                       className={`inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1.5 text-xs leading-tight font-semibold ${
                         stockIn
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-red-100 text-red-700"
+                          ? "bg-success/15 text-success"
+                          : "bg-warning/15 text-warning"
                       }`}
                     >
                       {stockIn ? (
@@ -137,7 +137,7 @@ export default function RecentTransactionCard() {
                     </span>
                     <span
                       className={`text-sm leading-tight font-bold ${
-                        stockIn ? "text-primary" : "text-slate-900"
+                        stockIn ? "text-success" : "text-ink"
                       }`}
                     >
                       {stockIn ? "+" : "-"}
@@ -147,8 +147,8 @@ export default function RecentTransactionCard() {
                     <span className="max-w-14 text-sm leading-tight text-slate-400">
                       {formatTime(transaction.createdAt)}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                      <span className="size-2 rounded-full bg-primary" />
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-success">
+                      <span className="size-2 rounded-full bg-success" />
                       Done
                     </span>
                   </div>

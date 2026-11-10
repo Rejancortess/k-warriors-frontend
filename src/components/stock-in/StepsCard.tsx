@@ -11,7 +11,7 @@ export default function StepsCard({
   currentStep?: number;
 }) {
   return (
-    <section className="w-full rounded-xl bg-white px-6 py-4 shadow-sm ring-1 ring-slate-100">
+    <section className="w-full rounded-xl bg-white px-6 py-4 shadow-sm ring-1 ring-line">
       <ol className="grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4">
         {steps.map((step, index) => {
           const number = index + 1;
@@ -25,7 +25,7 @@ export default function StepsCard({
                   completed
                     ? "bg-primary text-white"
                     : current
-                      ? "bg-emerald-100 text-primary"
+                      ? "bg-success/15 text-primary"
                       : "bg-slate-100 text-slate-400"
                 }`}
               >

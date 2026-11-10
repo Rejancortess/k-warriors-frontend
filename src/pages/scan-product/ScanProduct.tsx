@@ -74,8 +74,7 @@ const ScanProduct = () => {
 
   return (
     <section className="p-6">
-      <h1 className="text-2xl font-semibold text-slate-950">Scan Product</h1>
-      <div className="mt-6 grid items-start gap-6 lg:grid-cols-2">
+      <div className="grid items-start gap-6 lg:grid-cols-2">
         <CameraScanner
           barcode={barcode}
           onBarcodeChange={updateBarcode}

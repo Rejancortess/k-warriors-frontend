@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
+  AlertTriangle,
   Barcode,
   ChevronLeft,
   ChevronRight,
@@ -11,6 +12,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 
+import { useAuthStore } from "../../stores/useAuthStore";
 import { productService } from "../../services/product.service";
 import type { Product } from "../../types/product.types";
 
@@ -83,6 +85,24 @@ export default function ProductInventory() {
   const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<Product | null>(null);
   const [pendingDelete, setPendingDelete] = useState<Product | null>(null);
+  const [deniedAction, setDeniedAction] = useState<"edit" | "delete" | null>(null);
+  const isStaff = useAuthStore((state) => state.profile?.role === "STAFF");
+
+  function requestEdit(product: Product) {
+    if (isStaff) {
+      setDeniedAction("edit");
+      return;
+    }
+    setEditing(product);
+  }
+
+  function requestDelete(product: Product) {
+    if (isStaff) {
+      setDeniedAction("delete");
+      return;
+    }
+    setPendingDelete(product);
+  }
 
   useEffect(() => {
     let active = true;
@@ -194,7 +214,7 @@ export default function ProductInventory() {
             <ul
               role="listbox"
               aria-label="Filter by status"
-              className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-xl bg-white py-1 shadow-lg ring-1 ring-slate-100"
+              className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-xl bg-white py-1 shadow-lg ring-1 ring-line"
             >
               {FILTERS.map((item) => (
                 <li key={item.id}>
@@ -218,20 +238,20 @@ export default function ProductInventory() {
         </div>
       </div>
 
-      <section className="mt-5 overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)] ring-1 ring-slate-100">
+      <section className="mt-5 overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)] ring-1 ring-line">
         {loading ? (
           <p className="flex items-center justify-center gap-2 px-6 py-16 text-sm text-slate-500">
             <LoaderCircle size={16} className="animate-spin" />
             Loading products...
           </p>
         ) : error ? (
-          <p className="px-6 py-16 text-center text-sm text-red-600">{error}</p>
+          <p className="px-6 py-16 text-center text-sm text-warning">{error}</p>
         ) : (
           <>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-[#F4F6FB] text-sm font-medium text-slate-500">
+                  <tr className="bg-canvas text-sm font-medium text-slate-500">
                     <th className="px-4 py-4 text-left font-medium whitespace-nowrap">
                       Product Name
                     </th>
@@ -265,25 +285,25 @@ export default function ProductInventory() {
                           className={
                             index === visible.length - 1
                               ? ""
-                              : "border-b border-slate-100"
+                              : "border-b border-line"
                           }
                         >
                           <td className="px-4 py-5 text-sm font-bold whitespace-nowrap text-slate-950">
                             {product.name}
                           </td>
                           <td className="px-4 py-5 text-center">
-                            <span className="inline-flex items-center gap-2 rounded-lg bg-[#EEF2FF] px-3 py-1.5 text-sm font-medium whitespace-nowrap text-slate-600">
+                            <span className="inline-flex items-center gap-2 rounded-lg bg-link/10 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-slate-600">
                               <Barcode size={15} className="text-slate-400" />
                               {product.barcode || "—"}
                             </span>
                           </td>
                           <td className="px-4 py-5 text-center text-sm font-bold whitespace-nowrap">
-                            <span className={low ? "text-red-600" : "text-slate-950"}>
+                            <span className={low ? "text-warning" : "text-slate-950"}>
                               {product.quantity.toLocaleString()}
                             </span>{" "}
                             <span
                               className={`font-medium ${
-                                low ? "text-red-400" : "text-slate-400"
+                                low ? "text-warning" : "text-slate-400"
                               }`}
                             >
                               units
@@ -293,13 +313,13 @@ export default function ProductInventory() {
                             <span
                               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
                                 low
-                                  ? "bg-red-100 text-red-500"
-                                  : "bg-emerald-100 text-emerald-600"
+                                  ? "bg-warning/15 text-warning"
+                                  : "bg-success/15 text-success"
                               }`}
                             >
                               <span
                                 className={`h-1.5 w-1.5 rounded-full ${
-                                  low ? "bg-red-500" : "bg-emerald-500"
+                                  low ? "bg-warning" : "bg-success"
                                 }`}
                               />
                               {low ? "Low Stock" : "Normal"}
@@ -309,7 +329,7 @@ export default function ProductInventory() {
                             <div className="flex items-center justify-end gap-3 whitespace-nowrap">
                               <button
                                 type="button"
-                                onClick={() => setEditing(product)}
+                                onClick={() => requestEdit(product)}
                                 className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800"
                               >
                                 <Pencil size={15} />
@@ -317,8 +337,8 @@ export default function ProductInventory() {
                               </button>
                               <button
                                 type="button"
-                                onClick={() => setPendingDelete(product)}
-                                className="inline-flex items-center gap-1.5 text-sm font-medium text-red-500 hover:text-red-600"
+                                onClick={() => requestDelete(product)}
+                                className="inline-flex items-center gap-1.5 text-sm font-medium text-warning hover:text-warning"
                               >
                                 <Trash2 size={15} />
                                 Delete
@@ -409,6 +429,53 @@ export default function ProductInventory() {
           }}
         />
       ) : null}
+
+      {deniedAction ? (
+        <StaffActionWarning
+          action={deniedAction}
+          onClose={() => setDeniedAction(null)}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function StaffActionWarning({
+  action,
+  onClose,
+}: {
+  action: "edit" | "delete";
+  onClose: () => void;
+}) {
+  const verb = action === "edit" ? "edit" : "delete";
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 p-4">
+      <div
+        role="dialog"
+        aria-labelledby="staff-action-title"
+        className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl"
+      >
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-50 text-amber-500">
+          <AlertTriangle size={20} />
+        </div>
+        <h2 id="staff-action-title" className="mt-4 text-lg font-bold text-slate-950">
+          You can't {verb} products
+        </h2>
+        <p className="mt-2 text-sm text-slate-500">
+          Staff accounts can view inventory, but only an administrator can {verb} a
+          product.
+        </p>
+        <div className="mt-6 flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white"
+          >
+            OK
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -518,7 +585,7 @@ function EditProductDialog({
           </div>
         </div>
         {message ? (
-          <p className="mt-4 text-sm text-red-600" role="alert">
+          <p className="mt-4 text-sm text-warning" role="alert">
             {message}
           </p>
         ) : null}
@@ -582,7 +649,7 @@ function DeleteProductDialog({
           This removes the product from the inventory.
         </p>
         {message ? (
-          <p className="mt-4 text-sm text-red-600" role="alert">
+          <p className="mt-4 text-sm text-warning" role="alert">
             {message}
           </p>
         ) : null}
@@ -598,7 +665,7 @@ function DeleteProductDialog({
             type="button"
             onClick={handleDelete}
             disabled={deleting}
-            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-70"
+            className="rounded-lg bg-warning px-4 py-2 text-sm font-semibold text-white disabled:opacity-70"
           >
             {deleting ? "Deleting..." : "Delete"}
           </button>

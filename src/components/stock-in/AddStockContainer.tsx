@@ -216,7 +216,7 @@ export default function AddStockContainer() {
       {toast ? <Toast message={toast} onClose={() => setToast("")} /> : null}
       <form
         onSubmit={handleSubmit}
-        className="w-full rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100 sm:p-7"
+        className="w-full rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line sm:p-7"
       >
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -224,9 +224,9 @@ export default function AddStockContainer() {
               htmlFor="scan-code"
               className="text-base font-bold text-slate-950"
             >
-              Scan Product <span className="text-red-500">*</span>
+              Scan Product <span className="text-warning">*</span>
             </label>
-            <span className="rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
+            <span className="rounded-full bg-canvas px-2.5 py-0.5 text-xs font-medium text-muted">
               Barcode or QR
             </span>
           </div>
@@ -243,13 +243,13 @@ export default function AddStockContainer() {
         <div
           className={`mt-3 flex items-center gap-3 rounded-xl px-4 py-3 ${
             status === "exists" || (showMissing && status !== "available")
-              ? "bg-red-50 ring-1 ring-red-200"
-              : "bg-[#F4F6FB]"
+              ? "bg-warning/10 ring-1 ring-warning/30"
+              : "bg-canvas"
           }`}
         >
           <ScanBarcode
             size={18}
-            className={`shrink-0 ${status === "exists" ? "text-red-500" : "text-slate-500"}`}
+            className={`shrink-0 ${status === "exists" ? "text-warning" : "text-slate-500"}`}
           />
           <input
             id="scan-code"
@@ -281,13 +281,13 @@ export default function AddStockContainer() {
               Checking...
             </span>
           ) : status === "available" ? (
-            <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-primary">
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-success">
               <CircleCheck size={16} />
               New product
             </span>
           ) : status === "exists" ? (
             <span
-              className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-red-600"
+              className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-warning"
               role="status"
             >
               <CircleX size={16} />
@@ -304,7 +304,7 @@ export default function AddStockContainer() {
           htmlFor="product-name"
           className="mt-6 block text-base font-bold text-slate-950"
         >
-          Product Name <span className="text-red-500">*</span>
+          Product Name <span className="text-warning">*</span>
         </label>
         {status === "available" ? (
           <input
@@ -316,8 +316,8 @@ export default function AddStockContainer() {
             aria-invalid={showMissing && !hasName}
             className={`mt-3 w-full rounded-xl px-4 py-4 text-lg font-bold text-slate-950 outline-none placeholder:font-bold placeholder:text-slate-400 disabled:opacity-60 ${
               showMissing && !hasName
-                ? "bg-red-50 ring-1 ring-red-200"
-                : "bg-[#F4F6FB]"
+                ? "bg-warning/10 ring-1 ring-warning/30"
+                : "bg-canvas"
             }`}
           />
         ) : (
@@ -325,10 +325,10 @@ export default function AddStockContainer() {
             id="product-name"
             className={`mt-3 rounded-xl px-4 py-4 text-lg font-bold ${
               lookingUp
-                ? "animate-pulse bg-[#F4F6FB] text-slate-300"
+                ? "animate-pulse bg-canvas text-slate-300"
                 : status === "exists" || showMissing
-                  ? "bg-red-50 text-red-600 ring-1 ring-red-200"
-                  : "bg-[#F4F6FB] text-slate-400"
+                  ? "bg-warning/10 text-warning ring-1 ring-warning/30"
+                  : "bg-canvas text-slate-400"
             }`}
           >
             {lookingUp
@@ -344,7 +344,7 @@ export default function AddStockContainer() {
             htmlFor="quantity"
             className="text-base font-bold text-slate-950"
           >
-            Enter Quantity <span className="text-red-500">*</span>
+            Enter Quantity <span className="text-warning">*</span>
           </label>
           <span className="text-sm text-slate-400">Units count</span>
         </div>
@@ -352,8 +352,8 @@ export default function AddStockContainer() {
         <div
           className={`mt-3 flex items-center gap-3 rounded-xl p-2 ${
             showMissing && !hasQuantity
-              ? "bg-red-50 ring-1 ring-red-200"
-              : "bg-[#F4F6FB]"
+              ? "bg-warning/10 ring-1 ring-warning/30"
+              : "bg-canvas"
           }`}
         >
           <button
@@ -361,7 +361,7 @@ export default function AddStockContainer() {
             aria-label="Decrease quantity"
             disabled={loading || status === "exists"}
             onClick={() => changeQuantity((quantityValue || 1) - 1)}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-slate-100 disabled:opacity-50"
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-line disabled:opacity-50"
           >
             <Minus size={18} />
           </button>
@@ -383,7 +383,7 @@ export default function AddStockContainer() {
             aria-label="Increase quantity"
             disabled={loading || status === "exists"}
             onClick={() => changeQuantity((quantityValue || 0) + 1)}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-slate-100 disabled:opacity-50"
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-line disabled:opacity-50"
           >
             <Plus size={18} />
           </button>
@@ -394,7 +394,7 @@ export default function AddStockContainer() {
             htmlFor="min-stock"
             className="text-base font-bold text-slate-950"
           >
-            Minimum Stock <span className="text-red-500">*</span>
+            Minimum Stock <span className="text-warning">*</span>
           </label>
           <span className="text-sm text-slate-400">Low stock alert</span>
         </div>
@@ -402,8 +402,8 @@ export default function AddStockContainer() {
         <div
           className={`mt-3 flex items-center gap-3 rounded-xl p-2 ${
             showMissing && !hasMinStock
-              ? "bg-red-50 ring-1 ring-red-200"
-              : "bg-[#F4F6FB]"
+              ? "bg-warning/10 ring-1 ring-warning/30"
+              : "bg-canvas"
           }`}
         >
           <button
@@ -411,7 +411,7 @@ export default function AddStockContainer() {
             aria-label="Decrease minimum stock"
             disabled={loading || status === "exists"}
             onClick={() => changeMinStock((Number(minStock) || 0) - 1)}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-slate-100 disabled:opacity-50"
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-line disabled:opacity-50"
           >
             <Minus size={18} />
           </button>
@@ -434,7 +434,7 @@ export default function AddStockContainer() {
             aria-label="Increase minimum stock"
             disabled={loading || status === "exists"}
             onClick={() => changeMinStock((Number(minStock) || 0) + 1)}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-slate-100 disabled:opacity-50"
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-xl text-slate-700 shadow-sm ring-1 ring-line disabled:opacity-50"
           >
             <Plus size={18} />
           </button>
@@ -442,7 +442,7 @@ export default function AddStockContainer() {
 
         <div className="mt-6 flex items-end justify-between gap-3">
           <label htmlFor="price" className="text-base font-bold text-slate-950">
-            Price <span className="text-red-500">*</span>
+            Price <span className="text-warning">*</span>
           </label>
           <span className="text-sm text-slate-400">Per unit</span>
         </div>
@@ -450,8 +450,8 @@ export default function AddStockContainer() {
         <div
           className={`mt-3 flex items-center gap-3 rounded-xl px-4 py-3 ${
             showMissing && !hasPrice
-              ? "bg-red-50 ring-1 ring-red-200"
-              : "bg-[#F4F6FB]"
+              ? "bg-warning/10 ring-1 ring-warning/30"
+              : "bg-canvas"
           }`}
         >
           <span className="text-lg font-bold text-slate-400">₱</span>
@@ -467,7 +467,7 @@ export default function AddStockContainer() {
           />
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[#F4F6FB] px-4 py-3 text-sm text-slate-600">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-canvas px-4 py-3 text-sm text-slate-600">
           <span className="inline-flex items-center gap-2">
             <ClipboardList size={16} className="text-slate-400" />
             Current in stock:{" "}
@@ -475,7 +475,7 @@ export default function AddStockContainer() {
               {currentStock === null ? "—" : `${currentStock} units`}
             </strong>
           </span>
-          <span className="inline-flex items-center gap-2 font-medium text-primary">
+          <span className="inline-flex items-center gap-2 font-medium text-success">
             <ArrowRight size={16} />
             New total:{" "}
             <strong className="font-bold">
@@ -487,7 +487,7 @@ export default function AddStockContainer() {
         <button
           type="submit"
           disabled={loading || status === "exists"}
-          className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-primary py-4 text-white transition hover:bg-[#00593c] disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-primary py-4 text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="inline-flex items-center gap-2 text-base font-semibold">
             {submitting ? (
@@ -505,7 +505,7 @@ export default function AddStockContainer() {
         </button>
 
         {message ? (
-          <p className="mt-3 text-sm text-red-600" role="status">
+          <p className="mt-3 text-sm text-warning" role="status">
             {message}
           </p>
         ) : null}

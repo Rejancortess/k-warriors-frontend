@@ -91,7 +91,7 @@ function initials(name: string) {
 }
 
 function avatarColor(name: string) {
-  const colors = ["bg-primary", "bg-slate-500", "bg-teal-600", "bg-emerald-700"];
+  const colors = ["bg-primary", "bg-muted", "bg-link", "bg-success"];
   const total = [...name].reduce((sum, char) => sum + char.charCodeAt(0), 0);
   return colors[total % colors.length];
 }
@@ -247,7 +247,7 @@ export default function TransactionHistoryContainer() {
   }
 
   return (
-    <section className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-100 sm:p-6">
+    <section className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-line sm:p-6">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
         <div className="relative min-w-0 flex-1">
           <Search
@@ -262,7 +262,7 @@ export default function TransactionHistoryContainer() {
               setPage(1);
             }}
             placeholder="Search by product name, barcode."
-            className="w-full rounded-full bg-[#F4F6FB] py-3 pr-4 pl-11 text-sm outline-none placeholder:text-slate-400"
+            className="w-full rounded-full bg-canvas py-3 pr-4 pl-11 text-sm outline-none placeholder:text-slate-400"
           />
         </div>
 
@@ -277,7 +277,7 @@ export default function TransactionHistoryContainer() {
             <ChevronDown size={16} className="text-slate-400" />
           </button>
           {rangeOpen ? (
-            <div className="absolute right-0 z-20 mt-2 w-64 rounded-xl bg-white p-4 shadow-lg ring-1 ring-slate-100">
+            <div className="absolute right-0 z-20 mt-2 w-64 rounded-xl bg-white p-4 shadow-lg ring-1 ring-line">
               <label className="block text-xs font-semibold text-slate-500" htmlFor="from-date">
                 From
               </label>
@@ -323,7 +323,7 @@ export default function TransactionHistoryContainer() {
                 onClick={() => selectPeriod(item.id)}
                 className={`rounded-full px-3 py-1.5 text-sm ${
                   active
-                    ? "bg-[#EEF2FF] font-semibold text-slate-800"
+                    ? "bg-link/10 font-semibold text-slate-800"
                     : "text-slate-500 hover:bg-slate-50"
                 }`}
               >
@@ -340,12 +340,12 @@ export default function TransactionHistoryContainer() {
               type="button"
               aria-expanded={typeOpen}
               onClick={() => setTypeOpen((open) => !open)}
-              className="rounded-full bg-[#EEF2FF] px-3 py-1.5 text-sm font-semibold text-slate-800"
+              className="rounded-full bg-link/10 px-3 py-1.5 text-sm font-semibold text-slate-800"
             >
               {typeLabel}
             </button>
             {typeOpen ? (
-              <ul className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-xl bg-white py-1 shadow-lg ring-1 ring-slate-100">
+              <ul className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-xl bg-white py-1 shadow-lg ring-1 ring-line">
                 {TYPES.map((item) => (
                   <li key={item.id}>
                     <button
@@ -377,13 +377,13 @@ export default function TransactionHistoryContainer() {
           Loading transactions...
         </p>
       ) : error ? (
-        <p className="px-6 py-16 text-center text-sm text-red-600">{error}</p>
+        <p className="px-6 py-16 text-center text-sm text-warning">{error}</p>
       ) : (
         <>
           <div className="mt-5 overflow-x-auto">
             <table className="w-full min-w-[920px] border-collapse">
               <thead>
-                <tr className="bg-[#F4F6FB] text-left text-sm font-medium text-slate-500">
+                <tr className="bg-canvas text-left text-sm font-medium text-slate-500">
                   <th className="rounded-l-xl px-4 py-3 font-medium">
                     <button
                       type="button"
@@ -419,13 +419,13 @@ export default function TransactionHistoryContainer() {
                     const name = item.user?.name || "Unknown";
 
                     return (
-                      <tr key={item.id} className="border-b border-slate-100">
+                      <tr key={item.id} className="border-b border-line">
                         <td className="px-4 py-4">
                           <span
                             className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
                               incoming
-                                ? "bg-emerald-50 text-emerald-600"
-                                : "bg-red-50 text-red-500"
+                                ? "bg-success/10 text-success"
+                                : "bg-warning/10 text-warning"
                             }`}
                           >
                             {incoming ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
@@ -442,7 +442,7 @@ export default function TransactionHistoryContainer() {
                         </td>
                         <td
                           className={`px-4 py-4 text-sm font-bold ${
-                            incoming ? "text-emerald-600" : "text-red-500"
+                            incoming ? "text-success" : "text-warning"
                           }`}
                         >
                           {incoming ? "+" : "−"}

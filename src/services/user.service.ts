@@ -1,4 +1,5 @@
 import { api } from "../lib/api";
+import type { ApiResponse } from "../types/product.types";
 
 export interface CreateStaffInput {
   name: string;
@@ -6,9 +7,24 @@ export interface CreateStaffInput {
   role: "ADMIN" | "STAFF";
 }
 
+export interface AccountUser {
+  id: string;
+  name: string;
+  email: string;
+  role: "ADMIN" | "STAFF";
+  isActive: boolean;
+}
+
 export const userService = {
   getAll: async () => {
-    const response = await api.get("/users");
+    const response = await api.get<ApiResponse<AccountUser[]>>("/users");
+    return response.data;
+  },
+
+  updateRole: async (id: string, role: AccountUser["role"]) => {
+    const response = await api.patch<ApiResponse<AccountUser>>(`/users/${id}`, {
+      role,
+    });
     return response.data;
   },
 

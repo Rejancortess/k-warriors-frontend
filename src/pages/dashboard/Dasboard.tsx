@@ -23,6 +23,20 @@ const lowStockNote = (count: number) => {
   return `${count.toLocaleString()} products require attention`;
 };
 
+const StatsCardSkeleton = () => (
+  <div
+    className="flex h-full flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-line"
+    aria-hidden="true"
+  >
+    <div className="flex items-start justify-between gap-3">
+      <div className="h-4 w-24 animate-pulse rounded bg-slate-200" />
+      <div className="h-10 w-10 animate-pulse rounded-xl bg-slate-200" />
+    </div>
+    <div className="mt-5 h-9 w-20 animate-pulse rounded bg-slate-200" />
+    <div className="mt-4 h-4 w-36 animate-pulse rounded bg-slate-200" />
+  </div>
+);
+
 const Dasboard = () => {
   const stats = useDashboardStore((state) => state.stats);
   const loading = useDashboardStore((state) => state.loading);
@@ -43,19 +57,26 @@ const Dasboard = () => {
           <h1 className="text-2xl font-semibold">Dashboard</h1>
           <Link
             to="/stock-in"
-            className="flex items-center gap-2 text-sm hover:bg-primary/80 transition-colors duration-300 text-white bg-primary px-4 py-2 rounded-xl"
+            className="flex items-center gap-2 text-sm hover:bg-primary-hover transition-colors duration-300 text-white bg-primary px-4 py-2 rounded-xl"
           >
             <Plus />
             New Stock Entries
           </Link>
         </div>
-        {loading && !stats ? (
-          <p className="mb-6 text-sm text-slate-500">Loading dashboard...</p>
-        ) : null}
         {error && !stats ? (
-          <p className="mb-6 text-sm text-red-600">{error}</p>
+          <p className="mb-6 text-sm text-warning">{error}</p>
         ) : null}
-        {stats ? (
+        {loading && !stats ? (
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+            aria-busy="true"
+            aria-label="Loading dashboard"
+          >
+            {Array.from({ length: 4 }, (_, index) => (
+              <StatsCardSkeleton key={index} />
+            ))}
+          </div>
+        ) : stats ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             <StatsCard
               title="Total Products"

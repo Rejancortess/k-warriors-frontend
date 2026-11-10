@@ -5,7 +5,7 @@ import { useAuthStore } from "../../stores/useAuthStore";
 
 function AuthLoading() {
   return (
-    <div className="flex h-screen items-center justify-center bg-[#F9F9FF] text-slate-500">
+    <div className="flex h-screen items-center justify-center bg-canvas text-slate-500">
       <LoaderCircle className="animate-spin text-primary" size={28} />
       <span className="sr-only">Loading</span>
     </div>

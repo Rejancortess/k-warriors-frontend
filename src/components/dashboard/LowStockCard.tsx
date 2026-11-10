@@ -34,19 +34,19 @@ export default function LowStockCard() {
   const criticalCount = products.length;
 
   return (
-    <section className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100">
+    <section className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <h2 className="text-xl font-bold tracking-tight text-slate-950">
             Low Stock
           </h2>
           {criticalCount > 0 ? (
-            <span className="rounded-full bg-red-100 px-2.5 py-1 text-xs font-semibold text-red-600">
+            <span className="rounded-full bg-warning/15 px-2.5 py-1 text-xs font-semibold text-warning">
               {criticalCount} critical
             </span>
           ) : null}
         </div>
-        <Link to="/inventory" className="text-sm font-semibold text-primary">
+        <Link to="/inventory" className="text-sm font-semibold text-link">
           See All
         </Link>
       </div>
@@ -57,7 +57,7 @@ export default function LowStockCard() {
           Loading low stock...
         </p>
       ) : error ? (
-        <p className="mt-6 text-sm text-red-600">{error}</p>
+        <p className="mt-6 text-sm text-warning">{error}</p>
       ) : products.length === 0 ? (
         <p className="mt-6 text-sm text-slate-500">No low stock products.</p>
       ) : (
@@ -80,7 +80,7 @@ export default function LowStockCard() {
                   </div>
                   <Link
                     to="/stock-in"
-                    className="shrink-0 rounded-full bg-indigo-100 px-4 py-1.5 text-sm font-medium text-slate-700"
+                    className="shrink-0 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary"
                   >
                     Restock
                   </Link>
@@ -88,7 +88,7 @@ export default function LowStockCard() {
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-200">
                   <div
                     className={`h-full rounded-full ${
-                      belowMin ? "bg-red-800" : "bg-emerald-300"
+                      belowMin ? "bg-warning" : "bg-success"
                     }`}
                     style={{ width: `${Math.max(ratio * 100, 4)}%` }}
                   />

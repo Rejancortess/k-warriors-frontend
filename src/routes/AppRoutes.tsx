@@ -9,6 +9,9 @@ import Inventory from "../pages/inventory/Inventory";
 import ScanProduct from "../pages/scan-product/ScanProduct";
 import StockIn from "../pages/stock-in/StockIn";
 import Transactions from "../pages/transactions/Transactions";
+import Profile from "../pages/account/Profile";
+import AccountSettings from "../pages/account/Settings";
+import Security from "../pages/account/Security";
 
 export default function AppRoutes() {
   return (
@@ -24,6 +27,9 @@ export default function AppRoutes() {
           <Route path="/scan-product" element={<ScanProduct />} />
           <Route path="/stock-in" element={<StockIn />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/account" element={<Profile />} />
+          <Route path="/account/settings" element={<AccountSettings />} />
+          <Route path="/account/security" element={<Security />} />
         </Route>
       </Route>
 

@@ -91,7 +91,7 @@ const ScannedProductCard = ({
   const ready = Boolean(product);
 
   return (
-    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-100">
+    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line">
       <div className="flex items-center justify-between gap-3">
         <h2
           className={`text-2xl font-bold tracking-tight ${
@@ -105,12 +105,12 @@ const ScannedProductCard = ({
         ) : null}
       </div>
       {error ? (
-        <p className="mt-2 text-sm text-red-600" role="alert">
+        <p className="mt-2 text-sm text-warning" role="alert">
           {error}
         </p>
       ) : null}
 
-      <div className="mt-5 rounded-2xl bg-[#F4F6FB] px-6 py-5">
+      <div className="mt-5 rounded-2xl bg-canvas px-6 py-5">
         <div className="flex h-16 items-stretch justify-center gap-px">
           {barsFor(code).map((filled, index) => (
             <span
@@ -132,12 +132,12 @@ const ScannedProductCard = ({
         </p>
       </div>
 
-      <div className="mt-4 rounded-2xl bg-[#F4F6FB] px-5 py-4">
+      <div className="mt-4 rounded-2xl bg-canvas px-5 py-4">
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm text-slate-500">Available Warehouse Stock</p>
           {product && low ? (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-500">
-              <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-warning/15 px-3 py-1 text-xs font-semibold text-warning">
+              <span className="h-1.5 w-1.5 rounded-full bg-warning" />
               {product.quantity === 0 ? "Out of Stock" : "Low Stock Alert"}
             </span>
           ) : null}
@@ -192,7 +192,7 @@ const ScannedProductCard = ({
           type="button"
           disabled={!product || submitting !== null || product.quantity === 0}
           onClick={() => void moveStock("out")}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-4 py-3 text-sm font-semibold text-red-500 disabled:opacity-70"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-warning/30 bg-white px-4 py-3 text-sm font-semibold text-warning disabled:opacity-70"
         >
           <ArrowUpFromLine size={16} />
           {submitting === "out" ? "Saving..." : "Stock Out"}
@@ -200,7 +200,7 @@ const ScannedProductCard = ({
       </div>
 
       {message ? (
-        <p className="mt-3 text-sm text-red-600" role="alert">
+        <p className="mt-3 text-sm text-warning" role="alert">
           {message}
         </p>
       ) : null}

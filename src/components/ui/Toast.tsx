@@ -24,7 +24,7 @@ export default function Toast({
       role="status"
       className="animate-toast-in fixed top-20 right-6 z-50 flex max-w-sm items-center gap-3 rounded-xl bg-white py-3 pr-3 pl-4 shadow-lg ring-1 ring-slate-200"
     >
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-primary">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-success/10 text-success">
         <CircleCheck size={18} />
       </span>
       <div className="min-w-0 pr-1">
