@@ -60,7 +60,7 @@ export default function Profile() {
   }
 
   return (
-    <section className="p-6">
+    <section className="p-4 sm:p-6">
       <h1 className="text-2xl font-semibold text-slate-950">My Profile</h1>
       <form
         onSubmit={handleSubmit}
@@ -185,7 +185,7 @@ function AccountList({ currentUserId }: { currentUserId: string }) {
             const isYou = account.id === currentUserId;
 
             return (
-              <li key={account.id} className="flex items-center gap-3 py-3">
+              <li key={account.id} className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:gap-3">
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-slate-950">
                     {account.name}
@@ -208,7 +208,7 @@ function AccountList({ currentUserId }: { currentUserId: string }) {
                   onChange={(event) =>
                     void changeRole(account, event.target.value as AccountUser["role"])
                   }
-                  className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-primary disabled:opacity-60"
+                  className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-primary disabled:opacity-60 sm:w-auto"
                 >
                   <option value="ADMIN">Administrator</option>
                   <option value="STAFF">Staff</option>

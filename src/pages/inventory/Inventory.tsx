@@ -2,7 +2,7 @@ import ProductInventory from "../../components/inventory/ProductInventory";
 
 const Inventory = () => {
   return (
-    <section className="p-6">
+    <section className="p-4 sm:p-6">
       <ProductInventory />
     </section>
   );

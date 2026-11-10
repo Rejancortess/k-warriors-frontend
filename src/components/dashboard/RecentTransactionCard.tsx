@@ -54,8 +54,8 @@ export default function RecentTransactionCard() {
   }, []);
 
   return (
-    <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line">
-      <div className="flex items-center justify-between gap-4">
+    <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-lg font-bold tracking-tight text-slate-950">
           Recent Transactions
         </h2>

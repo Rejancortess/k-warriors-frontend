@@ -78,7 +78,7 @@ export default function Security() {
   }
 
   return (
-    <section className="p-6">
+    <section className="p-4 sm:p-6">
       <h1 className="text-2xl font-semibold text-slate-950">Change password</h1>
       <p className="mt-2 text-sm text-slate-500">
         Enter your current password, then choose a new one.

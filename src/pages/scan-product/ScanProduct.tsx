@@ -73,7 +73,7 @@ const ScanProduct = () => {
   }, [barcode, retry]);
 
   return (
-    <section className="p-6">
+    <section className="p-4 sm:p-6">
       <div className="grid items-start gap-6 lg:grid-cols-2">
         <CameraScanner
           barcode={barcode}

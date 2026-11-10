@@ -137,8 +137,8 @@ export default function Header() {
   const displayEmail = profile?.email || accountEmail || "";
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-line bg-white px-6">
-      <div className="relative w-full max-w-md" ref={containerRef}>
+    <header className="flex h-16 items-center justify-between gap-2 border-b border-line bg-white px-3 sm:gap-4 sm:px-6">
+      <div className="relative min-w-0 flex-1 max-w-md" ref={containerRef}>
         <Search
           size={18}
           className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted"
@@ -216,7 +216,7 @@ export default function Header() {
         ) : null}
       </div>
 
-      <div className="ml-4 flex items-center gap-5">
+      <div className="flex shrink-0 items-center gap-3 sm:gap-5">
         <NotificationMenu
           open={notesOpen}
           onOpenChange={(next) => {
@@ -247,7 +247,7 @@ export default function Header() {
           {menuOpen ? (
             <div
               role="menu"
-              className="absolute top-full right-0 z-40 mt-3 w-72 rounded-2xl border border-slate-200 bg-white p-4 text-slate-950 shadow-xl"
+              className="fixed inset-x-3 top-[4.25rem] z-40 rounded-2xl border border-slate-200 bg-white p-4 text-slate-950 shadow-xl sm:absolute sm:inset-x-auto sm:top-full sm:right-0 sm:mt-3 sm:w-72"
             >
               <div className="flex items-start gap-3 px-1 pb-4">
                 <UserRound size={28} className="mt-0.5 shrink-0 text-slate-700" />

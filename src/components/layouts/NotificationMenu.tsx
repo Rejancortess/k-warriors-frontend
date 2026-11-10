@@ -210,7 +210,7 @@ export default function NotificationMenu({ open, onOpenChange }: NotificationMen
         <div
           role="dialog"
           aria-label="Notifications"
-          className="absolute top-full right-0 z-40 mt-3 flex w-[22rem] max-w-[calc(100vw-2rem)] flex-col rounded-2xl border border-slate-200 bg-white text-slate-950 shadow-xl"
+          className="fixed inset-x-3 top-[4.25rem] z-40 flex max-h-[min(32rem,calc(100dvh-6rem))] flex-col overflow-y-auto rounded-2xl border border-slate-200 bg-white text-slate-950 shadow-xl sm:absolute sm:inset-x-auto sm:top-full sm:right-0 sm:mt-3 sm:w-[22rem] sm:max-h-none"
         >
           <div className="px-4 pt-4">
             <div className="flex items-center gap-2">

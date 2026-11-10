@@ -197,8 +197,8 @@ const CameraScanner = ({
   }
 
   return (
-    <section className="rounded-3xl bg-white p-5 text-slate-950 shadow-sm ring-1 ring-line">
-      <div className="flex items-start justify-between gap-4">
+    <section className="rounded-3xl bg-white p-4 text-slate-950 shadow-sm ring-1 ring-line sm:p-5">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-xl font-bold">Scan Product</h1>
           <p className="mt-1 text-sm text-slate-500">

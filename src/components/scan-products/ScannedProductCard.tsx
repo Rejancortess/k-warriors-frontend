@@ -91,7 +91,7 @@ const ScannedProductCard = ({
   const ready = Boolean(product);
 
   return (
-    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line">
+    <section className="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-line sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <h2
           className={`text-2xl font-bold tracking-tight ${
@@ -110,7 +110,7 @@ const ScannedProductCard = ({
         </p>
       ) : null}
 
-      <div className="mt-5 rounded-2xl bg-canvas px-6 py-5">
+      <div className="mt-5 rounded-2xl bg-canvas px-4 py-5 sm:px-6">
         <div className="flex h-16 items-stretch justify-center gap-px">
           {barsFor(code).map((filled, index) => (
             <span

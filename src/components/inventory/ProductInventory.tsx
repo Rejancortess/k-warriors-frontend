@@ -357,7 +357,7 @@ export default function ProductInventory() {
               <p className="text-sm text-slate-400">
                 Showing {from}-{to} of {filtered.length} registered products
               </p>
-              <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center gap-1">
                 <button
                   type="button"
                   aria-label="Previous page"

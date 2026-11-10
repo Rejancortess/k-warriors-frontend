@@ -216,9 +216,9 @@ export default function AddStockContainer() {
       {toast ? <Toast message={toast} onClose={() => setToast("")} /> : null}
       <form
         onSubmit={handleSubmit}
-        className="w-full rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line sm:p-7"
+        className="w-full rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line sm:p-7"
       >
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
             <label
               htmlFor="scan-code"
@@ -241,7 +241,7 @@ export default function AddStockContainer() {
         </div>
 
         <div
-          className={`mt-3 flex items-center gap-3 rounded-xl px-4 py-3 ${
+          className={`mt-3 flex flex-wrap items-center gap-3 rounded-xl px-4 py-3 ${
             status === "exists" || (showMissing && status !== "available")
               ? "bg-warning/10 ring-1 ring-warning/30"
               : "bg-canvas"

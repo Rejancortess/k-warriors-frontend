@@ -1,22 +1,19 @@
 import { Outlet } from "react-router-dom";
 
-import Sidebar from "./SideBar";
+import Sidebar, { MobileNav } from "./SideBar";
 import Header from "./Header";
 
 export default function MainLayout() {
   return (
-    <div className="flex h-screen overflow-hidden bg-canvas">
-      {/* Global Sidebar */}
+    <div className="flex h-dvh flex-col overflow-hidden bg-canvas md:flex-row">
       <Sidebar />
 
-      {/* Right Section */}
-      <div className="flex min-w-0 flex-1 flex-col">
-        {/* Global Header */}
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <Header />
-        {/* Dynamic Page Content */}
-        <main className="flex flex-1 flex-col overflow-y-auto bg-canvas">
+        <main className="flex min-h-0 flex-1 flex-col overflow-y-auto bg-canvas">
           <Outlet />
         </main>
+        <MobileNav />
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ export default function LowStockCard() {
   const criticalCount = products.length;
 
   return (
-    <section className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line">
+    <section className="flex h-full flex-col rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <h2 className="text-xl font-bold tracking-tight text-slate-950">

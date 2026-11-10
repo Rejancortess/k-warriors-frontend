@@ -6,7 +6,7 @@ export default function AccountSettings() {
   const email = useAuthStore((state) => state.user?.email);
 
   return (
-    <section className="p-6">
+    <section className="p-4 sm:p-6">
       <h1 className="text-2xl font-semibold text-slate-950">Account Settings</h1>
       <p className="mt-2 text-sm text-slate-500">
         Update the preferences for this account.

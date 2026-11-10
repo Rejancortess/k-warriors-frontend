@@ -52,12 +52,12 @@ const Dasboard = () => {
 
   return (
     <>
-      <section className="flex flex-col  p-6 ">
-        <div className=" flex justify-between items-center mb-10">
+      <section className="flex flex-col p-4 sm:p-6">
+        <div className="mb-6 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-semibold">Dashboard</h1>
           <Link
             to="/stock-in"
-            className="flex items-center gap-2 text-sm hover:bg-primary-hover transition-colors duration-300 text-white bg-primary px-4 py-2 rounded-xl"
+            className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm text-white transition-colors duration-300 hover:bg-primary-hover"
           >
             <Plus />
             New Stock Entries

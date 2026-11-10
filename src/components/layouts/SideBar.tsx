@@ -15,26 +15,31 @@ import { authService, type AuthProfile } from "../../services/auth.service";
 const menuItems = [
   {
     name: "Dashboard",
+    short: "Home",
     path: "/dashboard",
     icon: LayoutDashboard,
   },
   {
     name: "Inventory",
+    short: "Items",
     path: "/inventory",
     icon: Package,
   },
   {
     name: "Scan Product",
+    short: "Scan",
     path: "/scan-product",
     icon: ScanBarcode,
   },
   {
     name: "Stock In",
+    short: "Stock",
     path: "/stock-in",
     icon: PackagePlus,
   },
   {
     name: "Transactions",
+    short: "History",
     path: "/transactions",
     icon: History,
   },
@@ -87,7 +92,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="flex min-h-screen w-64 flex-col p-5 text-ink border-r border-line">
+    <aside className="hidden h-full w-64 shrink-0 flex-col border-r border-line p-5 text-ink md:flex">
       <div className="flex mb-10 items-center">
         <img
           src="/logo.svg"
@@ -146,5 +151,33 @@ export default function Sidebar() {
         </button>
       </div>
     </aside>
+  );
+}
+
+export function MobileNav() {
+  return (
+    <nav className="border-t border-line bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
+      <ul className="grid grid-cols-5">
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <li key={item.path}>
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex flex-col items-center gap-1 px-1 py-2 text-[11px] font-medium ${
+                    isActive ? "text-primary" : "text-muted"
+                  }`
+                }
+              >
+                <Icon size={20} />
+                <span className="max-w-full truncate">{item.short}</span>
+              </NavLink>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
