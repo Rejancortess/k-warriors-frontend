@@ -9,4 +9,26 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: "react",
+              test: /node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//,
+            },
+            {
+              name: "firebase",
+              test: /node_modules\/(@firebase|firebase)\//,
+            },
+            {
+              name: "zxing",
+              test: /node_modules\/@zxing\//,
+            },
+          ],
+        },
+      },
+    },
+  },
 });

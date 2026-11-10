@@ -46,13 +46,10 @@ export default function BarcodeCamera({ onDetected }: BarcodeCameraProps) {
   async function releaseCamera() {
     const controls = controlsRef.current;
     controlsRef.current = null;
-    const stop = controls?.stop();
-    if (stop instanceof Promise) {
-      try {
-        await stop;
-      } catch {
-        // The next getUserMedia still needs the tracks stopped.
-      }
+    try {
+      await Promise.resolve(controls?.stop());
+    } catch {
+      // The next getUserMedia still needs the tracks stopped.
     }
 
     const video = videoRef.current;
@@ -128,8 +125,7 @@ export default function BarcodeCamera({ onDetected }: BarcodeCameraProps) {
       });
 
       if (requestRef.current !== requestId) {
-        const stop = controls.stop();
-        if (stop instanceof Promise) await stop;
+        await Promise.resolve(controls.stop());
         return;
       }
 
